@@ -1,0 +1,15 @@
+/* CSS declarations go here */
+
+body{
+  background: lightblue;
+}
+.container{
+  margin-top: 20px;
+}
+.btn{
+  opacity: 0.7;
+  border-radius: 0;
+}
+.delete{
+  float: right;
+}
