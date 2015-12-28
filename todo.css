@@ -1,36 +1,56 @@
 /* CSS declarations go here */
 
-body{
+body {
   background: #EEE;
 }
-.container{
+
+.container {
   margin-top: 20px;
   max-width: 1200px;
 }
-.btn{
+
+.btn {
   border-radius: 0;
 }
-.alert{
+
+.alert {
   color: #000;
-  font-weight: bold;
   font-family: Helvetica;
-  font-size: 1.2em;
   position: relative;
 }
-.col-lg-3{
-  height: 120px;
 
+.col-lg-3 {
+  height: 120px;
 }
-.col-lg-12{
+
+.col-lg-12 {
   padding: 0 !important;
 }
-.remove{
+
+.remove {
   position: absolute;
   left: 0;
   bottom: 0;
 }
-.edit{
+
+.edit {
   position: absolute;
-  right: 172px;
+  left: 70px;
   bottom: 0;
+}
+
+.checkbox-style {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #444;
+  background: #888;
+  position: relative;
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+}
+
+.checked {
+  opacity: 0.4;
+  background: rgba(255, 0, 0, 0.5);
 }
