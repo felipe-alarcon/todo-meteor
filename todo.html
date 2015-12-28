@@ -3,24 +3,31 @@
 </head>
 
 <body>
-  <header class="container">
-  <form id="resolution" method="post">
-    <input type="text" name="title" class="form-control" placeholder="Add stuff to do here">
-    <input type="submit" name="Submit" class="btn btn-primary btn-block">
-  </form>  
-  
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <form id="resolution" method="post">
+            <input type="text" name="title" class="form-control" placeholder="Add stuff to do here">
+            <input type="submit" name="Submit" class="btn btn-primary btn-block">
+          </form>
+        </div>
+      </div>
+    </div>
   </header>
   <div class="container">
-    <ul class="list-unstyled">
+    <div class="row">
       {{#each resolutions}}
         {{> resolution}}
       {{/each}}
-    </ul>
+    </div>
   </div>
 </body>
 
 <template name="resolution">
-  <li class="alert alert-success">
-    {{title}}<a class="btn btn-danger delete">remove</a>
-  </li>
+  <div class="col-lg-3 alert alert-warning">
+    <div>{{title}}</div>
+      <button class="btn btn-danger remove">remove</button>
+      <button class="btn btn-warning edit">edit</button>
+  </div>
 </template>
