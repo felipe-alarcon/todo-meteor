@@ -4,22 +4,41 @@
 
 <body>
     <header>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="container">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>{{> loginButtons}}</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                   {{#if currentUser}}
-                    <form id="resolution" method="post">
-                        <input type="text" maxlength="60" name="title" class="form-control" placeholder="Add things to do || MAX 60 Characters">
-                        <input type="submit" name="Submit" class="btn btn-primary btn-block">
-                    </form>
+                    {{#unless currentUser}}
+                    <div class="alert alert-warning">
+                        <strong>Login or Signup</strong> To access the to do app, no need for email, just enter a username!
+                    </div>
+                    {{/unless}} {{#if currentUser}}
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h3>Enter your Todo's here</h3></div>
+                        <div class="panel-body">
+                            <form id="resolution" method="post">
+                                <input type="text" maxlength="60" name="title" class="form-control" placeholder="What needs to be done?">
+                                <input type="submit" name="Submit" class="btn btn-success btn-block">
+                            </form>
+
+                        </div>
+                    </div>
+
                     {{/if}}
                 </div>
             </div>
         </div>
     </header>
-    <div class="container">
-        {{> loginButtons}}
-    </div>
     <div class="container">
         <div class="row">
             {{#each resolutions}} {{> resolution}} {{/each}}
@@ -28,9 +47,14 @@
 </body>
 
 <template name="resolution">
-    <div class="col-lg-3 alert alert-success {{#if checked}}checked{{/if}}">
+    <div class="col-lg-3 alert alert-warning {{#if checked}}checked{{/if}}">
         <input class="toggle-action checkbox-style" type="checkbox" checked="{{checked}}" />
         <div>{{title}}</div>
         <button class="btn btn-danger remove">remove</button>
+        {{#if isOwner}}
+        <button class="btn btn-{{#if private}}success{{else}}default{{/if}} access">
+            {{#if private}} Private {{else}} Public {{/if}}
+        </button>
+        {{/if}}
     </div>
 </template>

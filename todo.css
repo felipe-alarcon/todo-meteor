@@ -1,69 +1,78 @@
 /* CSS declarations go here */
 
 body {
-  background: #EEE;
+    background: lightblue;
+    font-family: Arial;
 }
 
 .container {
-  margin-top: 20px;
-  max-width: 1200px;
+    margin-top: 20px;
+    max-width: 1200px;
 }
 
 .btn {
-  border-radius: 0;
+    border-radius: 0;
 }
 
 .alert {
-  color: #000;
-  font-family: Helvetica;
-  position: relative;
+    color: #000;
+    position: relative;
 }
 
 .col-lg-3 {
-  height: 120px;
+    height: 120px;
+    box-shadow: 4px 4px 15px #777;
+    border-radius: 0;
 }
 
 .col-lg-12 {
-  padding: 0 !important;
+    padding: 0 !important;
 }
 
 .remove {
-  position: absolute;
-  left: 0;
-  bottom: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.access {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 .edit {
-  position: absolute;
-  left: 70px;
-  bottom: 0;
+    position: absolute;
+    left: 70px;
+    bottom: 0;
 }
 
 .checkbox-style {
-  width: 32px;
-  height: 32px;
-  border: 1px solid #444;
-  background: #888;
-  position: relative;
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #444;
+    background: #888;
+    position: relative;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
 }
 
 .checked {
-  opacity: 0.4;
-  background: rgba(255, 0, 0, 0.5);
+    opacity: 0.5;
+    background: rgba(255, 0, 0, 0.5);
 }
+
 .checkbox-style-md {
-  width: 16px;
-  height: 16px;
-  border: 1px solid #444;
-  background: #888;
-  position: relative;
-  position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #444;
+    background: #888;
+    position: relative;
+    position: absolute;
+}
+.panel{
+    box-shadow: 4px 4px 15px #777;
+    border-radius: 0;
 }
 
-.checked {
-  opacity: 0.4;
-  background: rgba(255, 0, 0, 0.5);
-}

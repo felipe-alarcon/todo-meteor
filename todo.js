@@ -1,9 +1,9 @@
-Resolutions = new Mongo.Collection('resolutions');
+Resolutions = new Mongo.Collection('resolutions'); // creates the mongo collection
 
 if (Meteor.isClient) {
 
     Meteor.subscribe("resolutions");
-    
+
     Template.body.helpers({
         resolutions: function () {
             return Resolutions.find();
@@ -24,6 +24,12 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.resolution.helpers({
+        isOwner: function () {
+            return this.owner === Meteor.userId();
+        }
+    });
+
     Template.resolution.events({
 
         'click .remove': function () {
@@ -32,21 +38,15 @@ if (Meteor.isClient) {
         'click .toggle-action': function () {
             Meteor.call("updateResolution", this._id, !this.checked);
         },
+        'click .access': function () {
+            Meteor.call("setPrivate", this._id, !this.private)
+        }
 
     });
     Accounts.ui.config({
         passwordSignupFields: "USERNAME_ONLY"
     });
 
-}
-
-if (Meteor.isServer) {
-    Meteor.startup(function () {
-
-    });
-    Meteor.publish("resolutions", function () {
-        return Resolutions.find();
-    });
 }
 
 Meteor.methods({
@@ -68,6 +68,18 @@ Meteor.methods({
                 checked: checked
             }
         });
+    },
+    setPrivate: function (id, private) {
+
     }
 
 });
+
+if (Meteor.isServer) {
+    Meteor.startup(function () {
+
+    });
+    Meteor.publish("resolutions", function () {
+        return Resolutions.find();
+    });
+}
