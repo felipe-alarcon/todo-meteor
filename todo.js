@@ -1,45 +1,73 @@
 Resolutions = new Mongo.Collection('resolutions');
 
 if (Meteor.isClient) {
-  Template.body.helpers({
-    resolutions: function () {
-      return Resolutions.find();
-    }
-  });
-  Template.body.events({
-    'submit #resolution': function (event) {
-      var title = event.target.title.value;
 
-      if (title.length > 0) {
-        Resolutions.insert({
-          title: title,
-          created: new Date()
-        });
-      }
+    Meteor.subscribe("resolutions");
+    
+    Template.body.helpers({
+        resolutions: function () {
+            return Resolutions.find();
+        },
+    });
 
-      event.target.title.value = "";
+    Template.body.events({
+        'submit #resolution': function (event) {
+            var title = event.target.title.value;
 
-      return false;
-    }
-  });
+            if (title.length > 0) {
+                Meteor.call("addResolution", title);
+            }
 
-  Template.resolution.events({
+            event.target.title.value = "";
 
-    'click .remove': function () {
-      Resolutions.remove(this._id);
-    },
-    'click .toggle-action': function () {
-      Resolutions.update(this._id, {
-        $set: {
-          checked: !this.checked
+            return false;
         }
-      });
-    }
-  });
+    });
+
+    Template.resolution.events({
+
+        'click .remove': function () {
+            Meteor.call("deleteResolution", this._id);
+        },
+        'click .toggle-action': function () {
+            Meteor.call("updateResolution", this._id, !this.checked);
+        },
+
+    });
+    Accounts.ui.config({
+        passwordSignupFields: "USERNAME_ONLY"
+    });
+
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
+    Meteor.startup(function () {
+
+    });
+    Meteor.publish("resolutions", function () {
+        return Resolutions.find();
+    });
 }
+
+Meteor.methods({
+
+    addResolution: function (title) {
+        Resolutions.insert({
+            title: title,
+            created: new Date(),
+            owner: Meteor.userId(), // _id of logged in user
+            username: Meteor.user().username // username of logged in user
+        });
+    },
+    deleteResolution: function (id) {
+        Resolutions.remove(id);
+    },
+    updateResolution: function (id, checked) {
+        Resolutions.update(id, {
+            $set: {
+                checked: checked
+            }
+        });
+    }
+
+});

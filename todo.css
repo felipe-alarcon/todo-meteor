@@ -54,3 +54,16 @@ body {
   opacity: 0.4;
   background: rgba(255, 0, 0, 0.5);
 }
+.checkbox-style-md {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #444;
+  background: #888;
+  position: relative;
+  position: absolute;
+}
+
+.checked {
+  opacity: 0.4;
+  background: rgba(255, 0, 0, 0.5);
+}
