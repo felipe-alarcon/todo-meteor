@@ -60,9 +60,21 @@ Meteor.methods({
         });
     },
     deleteResolution: function (id) {
+        var res = Resolutions.findOne(id);
+
+        if (res.owner !== Meteor.userId()) {
+            throw new Meteor.Error("Not Authorized!");
+        }
+
         Resolutions.remove(id);
     },
     updateResolution: function (id, checked) {
+        var res = Resolutions.findOne(id);
+
+        if (res.owner !== Meteor.userId()) {
+            throw new Meteor.Error("Not Authorized!");
+        }
+        
         Resolutions.update(id, {
             $set: {
                 checked: checked
