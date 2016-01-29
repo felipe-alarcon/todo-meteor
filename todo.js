@@ -70,7 +70,16 @@ Meteor.methods({
         });
     },
     setPrivate: function (id, private) {
+        var res = Resolutions.findOne(id);
 
+        if (res.owner !== Meteor.userId()) {
+            throw new Meteor.Error("Not Authorized!");
+        }
+        Resolutions.update(id, {
+            $set: {
+                private: private
+            }
+        });
     }
 
 });
@@ -80,6 +89,17 @@ if (Meteor.isServer) {
 
     });
     Meteor.publish("resolutions", function () {
-        return Resolutions.find();
+        return Resolutions.find({
+            $or: [
+                {
+                    private: {
+                        $ne: true
+                    }
+                },
+                {
+                    owner: this.userId
+                }
+            ]
+        });
     });
 }
